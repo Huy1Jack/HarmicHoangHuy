@@ -1,16 +1,17 @@
-﻿@model Harmic.Models.TbMenu
+﻿@model Harmic.Models.TbProduct
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Delete";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
+
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Thêm menu</h1>
+                    <h1>Xóa sản phẩm</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -31,56 +32,54 @@
                     <!-- general form elements -->
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Thêm menu</h3>
+                            <h3 class="card-title">Xóa sản phẩm</h3>
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form asp-action="Create" asp-area="Admin">
+                        <form asp-action="Edit" asp-area="Admin">
                             <div class="card-body">
                                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                 <div class="form-group">
-                                    <label asp-for="Title" class="control-label">Tiêu đề</label>
-                                    <input asp-for="Title" class="form-control" />
-                                    <span asp-validation-for="Title" class="text-danger"></span>
+                                    <label for="exampleInputEmaill">Tiêu đề:</label>
+                                    @Html.DisplayFor(model => model.Title)
                                 </div>
                                 <div class="form-group">
-                                    <label asp-for="Alias" class="control-label"></label>
-                                    <input asp-for="Alias" class="form-control" />
-                                    <span asp-validation-for="Alias" class="text-danger"></span>
+                                    <label for="exampleInputPassword1">CategoryProductId:</label>
+                                    @Html.DisplayFor(model => model.CategoryProductId)
                                 </div>
                                 <div class="form-group">
-                                    <label asp-for="Description" class="control-label">Mô tả</label>
-                                    <input asp-for="Description" class="form-control" />
-                                    <span asp-validation-for="Description" class="text-danger"></span>
+                                    <label for="exampleInputPassword1">Giá:</label>
+                                    @Html.DisplayFor(model => model.Price)
                                 </div>
                                 <div class="form-group">
-                                    <label asp-for="Levels" class="control-label">Mức</label>
-                                    <input asp-for="Levels" class="form-control" />
-                                    <span asp-validation-for="Levels" class="text-danger"></span>
+                                    <label for="exampleInputPassword1">Giá giảm: </label>
+                                    @Html.DisplayFor(model => model.PriceSale)
                                 </div>
                                 <div class="form-group">
-                                    <label asp-for="ParentId" class="control-label">Menu cha</label>
-                                    <input asp-for="ParentId" class="form-control" />
-                                    <span asp-validation-for="ParentId" class="text-danger"></span>
+                                    <label for="exampleInputPassword1">Số lượng:</label>
+                                    @Html.DisplayFor(model => model.Quantity)
                                 </div>
                                 <div class="form-group">
-                                    <label asp-for="Position" class="control-label">Vị trí</label>
-                                    <input asp-for="Position" class="form-control" />
-                                    <span asp-validation-for="Position" class="text-danger"></span>
-                                </div>
-                                <div class="form-group form-check">
-                                    <input type="checkbox" asp-for="IsActive" class="form-check-input" />
-                                    <label class="form-check-label" asp-for="IsActive">Trạng thái</label>
+                                    <label for="exampleInputPassword1">Sản phẩm mới:</label>
+                                    @Html.DisplayFor(model => model.IsNew)
                                 </div>
                                 <div class="form-group">
-                                    <input type="submit" value="Thêm mới" class="btn btn-primary" />
+                                    <label for="exampleInputPassword1">Sản phẩm bán chạy:</label>
+                                    @Html.DisplayFor(model => model.IsBestSeller)
                                 </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Hiện:</label>
+                                    @Html.DisplayFor(model => model.IsActive)
+                                </div>
+                                
                             </div>
                             <!-- /.card-body -->
-
-                            <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </div>
+                            <form asp-action="Delete">
+                                <input type="hidden" asp-for="ProductId" />
+                                <input type="submit" value="Xóa" class="btn btn-danger" />
+                                <a asp-action="Index" class="btn btn-primary">Quay lại</a>
+                            </form>
+                            
                         </form>
                     </div>
                     <!-- /.card -->
