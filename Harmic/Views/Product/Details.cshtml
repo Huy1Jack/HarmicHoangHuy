@@ -326,10 +326,11 @@
                                 
                                 @foreach(var item in productRelated)
                                 {
+                                    string sUrl = $"/product/{item.Alias}-{item.ProductId}.html";
                                     <div class="swiper-slide">
                                         <div class="product-item">
                                             <div class="product-img img-zoom-effect">
-                                                <a href="#">
+                                                <a href="@sUrl">
                                                     <img class="img-full" src="~/assets/images/product/medium-size/@item.Image" alt="Product Images">
                                                 </a>
                                                 <div class="product-add-action">

@@ -22,8 +22,8 @@
 
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Views\Shared\Components\MenuTop\" />
+    <Folder Include="wwwroot\files\" />
   </ItemGroup>
 
 </Project>
