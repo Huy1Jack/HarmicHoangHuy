@@ -20,7 +20,7 @@ namespace Harmic.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Index(Harmic.Models.TbAccount user)
+        public ActionResult Index(TbUser user)
         {
             if (user == null)
             {
@@ -28,7 +28,7 @@ namespace Harmic.Areas.Admin.Controllers
             }
 
             //Kiểm tra sự tồn tại của email trong CSDL
-            var check = _context.TbAccounts.Where(m => m.Email == user.Email).FirstOrDefault();
+            var check = _context.TbUsers.Where(m => m.Email == user.Email).FirstOrDefault();
             if (check != null)
             {
                 //Hiển thị thông báo, có thể làm cách khác

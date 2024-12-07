@@ -18,7 +18,7 @@ namespace Harmic.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Index(Harmic.Models.TbAccount user)
+        public IActionResult Index(TbUser user)
         {
             if (user == null)
             {
@@ -29,7 +29,7 @@ namespace Harmic.Areas.Admin.Controllers
             string pw = Function.MD5Password(user.Password);
 
             // Kiểm tra sự tồn tại của email và mật khẩu trong cơ sở dữ liệu
-            var check = _context.TbAccounts.Where(m => (m.Username == user.Username) && (m.Password == pw)).FirstOrDefault();
+            var check = _context.TbUsers.Where(m => (m.UserName == user.UserName) && (m.Password == pw)).FirstOrDefault();
 
             if (check == null)
             {
@@ -39,8 +39,8 @@ namespace Harmic.Areas.Admin.Controllers
 
             // Đăng nhập thành công
             Function._Message = string.Empty;
-            Function._UserID = check.AccountId;
-            Function._UserName = check.Username ?? string.Empty;
+            Function._UserID = check.UserId;
+            Function._UserName = check.UserName ?? string.Empty;
             Function._Email = check.Email ?? string.Empty;
 
             return RedirectToAction("Index", "Home");

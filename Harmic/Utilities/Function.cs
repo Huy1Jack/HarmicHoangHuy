@@ -40,7 +40,7 @@ namespace Harmic.Utilities
         }
         public static bool Islogin()
         {
-            if (string.IsNullOrEmpty(Function._UserName) || string.IsNullOrEmpty(Function._Email) || (Function._UserID <= 0))
+            if (string.IsNullOrEmpty(Function._UserName) || string.IsNullOrEmpty(Function._Email) || (Function._UserID <=0))
                 return false;
             return true;
         }

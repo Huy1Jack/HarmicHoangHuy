@@ -1,4 +1,7 @@
 ﻿@model IEnumerable<Harmic.Models.TbBlog>
+@{
+    List<TbBlogComment> blogComment = ViewBag.blogComment;
+}
 
 @foreach (var item in Model)
 {
@@ -13,10 +16,10 @@
             <div class="blog-content">
                 <div class="blog-meta text-dim-gray pb-3">
                     <ul>
-                        <li class="date"><i class="fa fa-calendar-o me-2"></i>@item.CreatedDate.Value.ToString("dd/mm/yyyy")</li>
+                        <li class="date"><i class="fa fa-calendar-o me-2"></i>@item.CreatedDate.Value.ToString("dd/MM/yyyy")</li>
                         <li>
                             <span class="comments me-3">
-                                <a href="javascript:void(0)">2 Comments</a>
+                                <a href="javascript:void(0)">@Model.Count() Comments</a>
                             </span>
                             <span class="link-share">
                                 <a href="javascript:void(0)">Share</a>

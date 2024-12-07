@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Harmic.Areas.Admin.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Harmic.Models;
@@ -14,8 +15,6 @@ public partial class HarmicContext : DbContext
         : base(options)
     {
     }
-
-    public virtual DbSet<TbAccount> TbAccounts { get; set; }
 
     public virtual DbSet<TbBlog> TbBlogs { get; set; }
 
@@ -43,27 +42,14 @@ public partial class HarmicContext : DbContext
 
     public virtual DbSet<TbRole> TbRoles { get; set; }
 
+    public virtual DbSet<TbUser> TbUsers { get; set; }
+
 //    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
 //        => optionsBuilder.UseSqlServer("data source=DESKTOP-PA8283R;initial catalog=Harmic;integrated security=True;TrustServerCertificate=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<TbAccount>(entity =>
-        {
-            entity.HasKey(e => e.AccountId).HasName("PK__tb_Accou__349DA5A612E30E69");
-
-            entity.ToTable("tb_Account");
-
-            entity.Property(e => e.AccountId).ValueGeneratedNever();
-            entity.Property(e => e.Email).HasMaxLength(255);
-            entity.Property(e => e.FullName).HasMaxLength(255);
-            entity.Property(e => e.LastLogin).HasColumnType("datetime");
-            entity.Property(e => e.Password).HasMaxLength(255);
-            entity.Property(e => e.Phone).HasMaxLength(20);
-            entity.Property(e => e.Username).HasMaxLength(255);
-        });
-
         modelBuilder.Entity<TbBlog>(entity =>
         {
             entity.HasKey(e => e.BlogId).HasName("PK__tb_Blog__54379E3005DED19E");
@@ -78,7 +64,6 @@ public partial class HarmicContext : DbContext
             entity.Property(e => e.ModifiedBy).HasMaxLength(255);
             entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
             entity.Property(e => e.SeoTitle).HasMaxLength(255);
-            entity.Property(e => e.Title).HasMaxLength(255);
         });
 
         modelBuilder.Entity<TbBlogComment>(entity =>
@@ -248,6 +233,19 @@ public partial class HarmicContext : DbContext
 
             entity.Property(e => e.RoleId).ValueGeneratedNever();
             entity.Property(e => e.RoleName).HasMaxLength(255);
+        });
+
+        modelBuilder.Entity<TbUser>(entity =>
+        {
+            entity.HasKey(e => e.UserId);
+
+            entity.ToTable("tb_User");
+
+            entity.Property(e => e.UserId).HasColumnName("UserID");
+            entity.Property(e => e.Email).HasMaxLength(50);
+            entity.Property(e => e.IsActive).HasColumnName("isActive");
+            entity.Property(e => e.Password).HasMaxLength(50);
+            entity.Property(e => e.UserName).HasMaxLength(50);
         });
 
         OnModelCreatingPartial(modelBuilder);

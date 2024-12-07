@@ -15,7 +15,7 @@ namespace Harmic.Areas.Admin.Controllers
         }
         public IActionResult Logout()
         {
-            Function._UserID = 0;
+            
             Function._UserName = string.Empty;
             Function._Email = string.Empty;
             Function._Message = string.Empty;
