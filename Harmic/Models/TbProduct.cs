@@ -42,4 +42,8 @@ public partial class TbProduct
     public bool? IsActive { get; set; }
 
     public int? Star { get; set; }
+
+    public virtual TbProductCategory? CategoryProduct { get; set; }
+
+    public virtual ICollection<TbProductReview> TbProductReviews { get; set; } = new List<TbProductReview>();
 }

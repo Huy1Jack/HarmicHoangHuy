@@ -41,13 +41,13 @@ namespace Harmic.Controllers
 
             return View(blog);
         }
-        public IActionResult comment(string _Name, string _Phone, string _Email, string _Detail)
+        public IActionResult comment(string Name, string Phone, string Email, string Detail)
         {
             TbBlogComment comment = new TbBlogComment() { };
-            comment.Name = _Name;
-            comment.Phone = _Phone;
-            comment.Email = _Email;
-            comment.Detail = _Detail;
+            comment.Name = Name;
+            comment.Phone = Phone;
+            comment.Email = Email;
+            comment.Detail = Detail;
             comment.CreatedDate = DateTime.Now;
             comment.BlogId = idblog;
             comment.IsActive = true;

@@ -44,10 +44,7 @@ public partial class HarmicContext : DbContext
 
     public virtual DbSet<TbUser> TbUsers { get; set; }
 
-//    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-//        => optionsBuilder.UseSqlServer("data source=DESKTOP-PA8283R;initial catalog=Harmic;integrated security=True;TrustServerCertificate=True;");
-
+  
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<TbBlog>(entity =>
@@ -72,11 +69,14 @@ public partial class HarmicContext : DbContext
 
             entity.ToTable("tb_BlogComment");
 
-            entity.Property(e => e.CommentId).ValueGeneratedNever();
             entity.Property(e => e.CreatedDate).HasColumnType("datetime");
             entity.Property(e => e.Email).HasMaxLength(255);
             entity.Property(e => e.Name).HasMaxLength(255);
             entity.Property(e => e.Phone).HasMaxLength(20);
+
+            entity.HasOne(d => d.Blog).WithMany(p => p.TbBlogComments)
+                .HasForeignKey(d => d.BlogId)
+                .HasConstraintName("FK_tb_BlogComment_tb_Blog");
         });
 
         modelBuilder.Entity<TbCategory>(entity =>
@@ -194,6 +194,10 @@ public partial class HarmicContext : DbContext
             entity.Property(e => e.Price).HasColumnType("decimal(18, 2)");
             entity.Property(e => e.PriceSale).HasColumnType("decimal(18, 2)");
             entity.Property(e => e.Title).HasMaxLength(255);
+
+            entity.HasOne(d => d.CategoryProduct).WithMany(p => p.TbProducts)
+                .HasForeignKey(d => d.CategoryProductId)
+                .HasConstraintName("FK_tb_Product_tb_ProductCategory");
         });
 
         modelBuilder.Entity<TbProductCategory>(entity =>
@@ -223,6 +227,10 @@ public partial class HarmicContext : DbContext
             entity.Property(e => e.Email).HasMaxLength(255);
             entity.Property(e => e.Name).HasMaxLength(255);
             entity.Property(e => e.Phone).HasMaxLength(20);
+
+            entity.HasOne(d => d.Product).WithMany(p => p.TbProductReviews)
+                .HasForeignKey(d => d.ProductId)
+                .HasConstraintName("FK_tb_ProductReview_tb_Product");
         });
 
         modelBuilder.Entity<TbRole>(entity =>
